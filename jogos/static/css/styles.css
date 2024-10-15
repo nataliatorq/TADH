@@ -18,7 +18,7 @@ body {
 }
 
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .sidebar {
@@ -96,4 +96,40 @@ hr {
     width: 30%;
     margin: auto;
     margin-bottom: 4rem;
+}
+
+.form-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    padding: 40px;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.form-box input,
+.form-box button {
+    border-radius: 50px;
+}
+
+.form-box button {
+    background-color: #1a73e8;
+}
+
+.form-box button:hover {
+    background-color: #0f5bb5;
+}
+
+.form-box a {
+    color: #1a73e8;
+}
+
+.form-box a:hover {
+    color: #0f5bb5;
+    text-decoration: underline;
 }
