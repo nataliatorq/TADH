@@ -34,15 +34,17 @@ def user_login(request):
 
         # Tenta autenticar o Usuário (Se não conseguir, retorna None)
         user = authenticate(username=username, password=password)
-        print(user)
         if user:
             # Realiza o login do Usuário já autenticado.
             login(request, user)
-            return redirect("home")
+            return redirect("jogos")
         else:
             return redirect("login")
     return render(request, "pages/login.html")
 
+def user_logout(request):
+    logout(request)
+    return redirect('login')
 
 def jogos_list(request):
     recentes = Jogo.objects.filter(categoria='recentes').order_by('-id')[:4]

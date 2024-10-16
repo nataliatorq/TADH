@@ -7,14 +7,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contacts</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-white" href="#">About</a>
+                    </li>
+                    
+                    {% if user.is_authenticated %}  
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'jogos' %}">jogos</a>
+                    </li>              
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Contacts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
