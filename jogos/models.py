@@ -22,3 +22,19 @@ class BaseUser(AbstractUser):
         blank=True,
         help_text='Specific permissions for this user.'
     )
+
+
+class Jogo(models.Model):
+    CATEGORIAS = [
+        ('recentes', 'Recentes'),
+        ('outros', 'Outros'),
+    ]
+
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField()
+    imagem = models.ImageField(upload_to='jogos/') 
+    url_jogo = models.URLField()
+    categoria = models.CharField(max_length=10, choices=CATEGORIAS)
+
+    def __str__(self):
+        return self.titulo

@@ -1,8 +1,10 @@
 from datetime import date
 
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 
 from .forms import UserRegisterForm
+from .models import Jogo
 
 
 def home(request):
@@ -24,5 +26,30 @@ def user_register(request):
 
     return render(request, "pages/cadastro.html", {'form': form})
 
-def login(request):
+def user_login(request):
+    if request.method == "POST":
+        # Obtem os dados enviados pelo Usuário
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        # Tenta autenticar o Usuário (Se não conseguir, retorna None)
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user:
+            # Realiza o login do Usuário já autenticado.
+            login(request, user)
+            return redirect("home")
+        else:
+            return redirect("login")
     return render(request, "pages/login.html")
+
+
+def jogos_list(request):
+    recentes = Jogo.objects.filter(categoria='recentes').order_by('-id')[:4]
+    outros = Jogo.objects.filter(categoria='outros').order_by('-id')[:8]
+    
+    context = {
+        'recentes': recentes,
+        'outros': outros
+    }
+    return render(request, 'pages/jogos.html', context)
