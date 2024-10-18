@@ -23,6 +23,8 @@ class BaseUser(AbstractUser):
         help_text='Specific permissions for this user.'
     )
 
+    USERNAME_FIELD = 'username'
+
 
 class Jogo(models.Model):
     CATEGORIAS = [
@@ -38,3 +40,10 @@ class Jogo(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+class Customer(models.Model):
+    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.user.username
+    

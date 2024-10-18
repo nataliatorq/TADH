@@ -21,7 +21,9 @@ def user_register(request):
         data_nascimento = date(ano, mes, dia)
         form.birth_date=data_nascimento
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.set_password(user.password)
+            user.save()
             return redirect('login')
 
     return render(request, "pages/cadastro.html", {'form': form})
