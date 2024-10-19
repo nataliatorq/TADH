@@ -36,7 +36,7 @@ class Jogo(models.Model):
     descricao = models.TextField()
     imagem = models.ImageField(upload_to='jogos/') 
     url_jogo = models.URLField()
-    categoria = models.CharField(max_length=10, choices=CATEGORIAS)
+    categoria = models.CharField(max_length=10, choices=CATEGORIAS, default='outros')
 
     def __str__(self):
         return self.titulo

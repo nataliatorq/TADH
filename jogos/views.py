@@ -1,9 +1,9 @@
 from datetime import date
 
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import UserRegisterForm
+from .forms import JogoForm, UserRegisterForm
 from .models import Jogo
 
 
@@ -30,14 +30,11 @@ def user_register(request):
 
 def user_login(request):
     if request.method == "POST":
-        # Obtem os dados enviados pelo Usuário
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        # Tenta autenticar o Usuário (Se não conseguir, retorna None)
         user = authenticate(username=username, password=password)
         if user:
-            # Realiza o login do Usuário já autenticado.
             login(request, user)
             return redirect("jogos")
         else:
@@ -57,3 +54,24 @@ def jogos_list(request):
         'outros': outros
     }
     return render(request, 'pages/jogos.html', context)
+
+def criar_jogo(request):
+    if request.method == 'POST':
+        form = JogoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('jogos')
+    else:
+        form = JogoForm()
+    return render(request, 'pages/jogo-form.html', {'form': form})
+
+def editar_jogo(request, id):
+    jogo = get_object_or_404(Jogo, id=id)
+    if request.method == 'POST':
+        form = JogoForm(request.POST, request.FILES, instance=jogo)
+        if form.is_valid():
+            form.save()
+            return redirect('jogos')
+    else:
+        form = JogoForm(instance=jogo)
+    return render(request, 'pages/jogo-form.html', {'form': form, 'jogo': jogo})

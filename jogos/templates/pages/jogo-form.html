@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="form-box col-md-4">
+            <h2 class="text-center">Cadastrar Jogo</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="titulo" class="form-label">Título</label>
+                    {{ form.titulo }}
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    {{ form.descricao }}
+                </div>
+                <div class="mb-3">
+                    <label for="imagem" class="form-label">Imagem</label>
+                    {{ form.imagem }}
+                </div>
+                <div class="mb-3">
+                    <label for="ur_jogo" class="form-label">Url do Jogo</label>
+                    {{ form.url_jogo }}
+                </div>
+                <div class="d-grid mb-3">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -25,6 +25,7 @@ body {
     height: 100%;
     width: 0;
     position: fixed;
+    z-index: 9999;
     top: 0;
     right: 0;
     background-color: #111;
@@ -52,6 +53,7 @@ body {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    cursor: pointer;
 }
 
 .content {

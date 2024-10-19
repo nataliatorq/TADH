@@ -6,7 +6,7 @@
         
         <div class="row g-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
             {% for jogo in recentes %}
-            <div class="card">
+            <div class="card p-0 z-index-1">
                 <img src="{{ jogo.imagem.url }}" class="card-img-top" alt="{{ jogo.titulo }}">
                 <div class="card-body bg-dark text-center">
                     <h5 class="card-title text-light mb-4">{{ jogo.titulo }}</h5>
@@ -22,7 +22,7 @@
         
         <div class="row g-4" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
             {% for jogo in outros %}
-            <div class="card">
+            <div class="card p-0">
                 <img src="{{ jogo.imagem.url }}" class="card-img-top" alt="{{ jogo.titulo }}">
                 <div class="card-body bg-dark text-center">
                     <h5 class="card-title text-light mb-4">{{ jogo.titulo }}</h5>
