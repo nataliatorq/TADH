@@ -1,1 +1,11 @@
 /venv
+# Cache do Django
+__pycache__/
+*.py[cod]
+
+# Cache do Django no diretório de cache
+cache/
+
+# Arquivos de migração do Django que podem gerar cache
+*/migrations/*.pyc
+*/migrations/__pycache__/

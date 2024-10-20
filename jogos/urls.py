@@ -8,6 +8,7 @@ urlpatterns = [
     path("login/", views.user_login, name="login"),
     path("logout/", views.user_logout, name="logout"),
     path("jogos/", views.jogos_list, name="jogos"),
-    path("jogos/criar/", views.criar_jogo, name='criar_jogo'),
-    path("jogos/editar/<int:id>/", views.editar_jogo, name='editar_jogo')
+    path("jogos/criar/", views.criar_jogo, name="criar_jogo"),
+    path("jogos/editar/<int:id>/", views.editar_jogo, name="editar_jogo"),
+    path("jogos/remover/<int:id>/", views.remover_jogo, name="deletar_jogo"),
 ]
