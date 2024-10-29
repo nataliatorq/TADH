@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
+{% block permissions %}
+  {% load permission_tags %}
+{% endblock permissions %}
+  
 {% block content %}
+{% if user|has_role:'Admin' %}
 <div class="container mt-4">
     <a href="{% url 'criar_jogo' %}" class="btn btn-success">
       <i class="fas fa-plus"></i> Novo Produto
     </a>
 </div>
+{% endif %}
     <div class="container mt-5 recents rounded-4 p-4 border">
         <h1 class="mb-4 fs-2 ms-0">Recentes</h1>
         
@@ -16,7 +22,10 @@
                 <div class="card-body bg-dark text-center">
                     <h5 class="card-title text-light mb-4">{{ jogo.titulo }}</h5>
                     <a href="{{ jogo.url_jogo }}" class="btn btn-primary w-100">Iniciar Sessão</a>
-                    <div class="d-flex justify-content-center gap-2 mt-4">
+                    {% if user|has_role:'Admin' %}
+                    <div class="d-flex justify-content-center 
+                    gap-2 mt-4">
+              
                         <a href="{% url 'editar_jogo' jogo.id %}" class="btn btn-warning">
                           <i class="fas fa-edit"></i>
                         </a>
@@ -25,6 +34,7 @@
                             <i class="fas fa-trash"></i>
                         </button>
                       </div>
+                      {% endif %}
                 </div>
             </div>
             <div class="modal fade" id="confirmDeleteModal-{{ jogo.id }}" tabindex="-1" aria-labelledby="confirmDeleteLabel-{{ jogo.id }}" aria-hidden="true">

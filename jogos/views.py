@@ -1,8 +1,10 @@
 from datetime import date
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required, user_passes_test
+from rolepermissions.decorators import has_role_decorator
+
 from .forms import JogoForm, UserRegisterForm
 from .models import Jogo
 
@@ -60,6 +62,7 @@ def jogos_list(request):
 
 
 @login_required(login_url="login")
+@has_role_decorator("Admin")
 def criar_jogo(request):
     if request.method == "POST":
         form = JogoForm(request.POST, request.FILES)
@@ -72,6 +75,7 @@ def criar_jogo(request):
 
 
 @login_required(login_url="login")
+@has_role_decorator("Admin")
 def editar_jogo(request, id):
     jogo = get_object_or_404(Jogo, id=id)
     if request.method == "POST":
@@ -85,6 +89,7 @@ def editar_jogo(request, id):
 
 
 @login_required(login_url="login")
+@has_role_decorator("Admin")
 def remover_jogo(request, id):
     jogo = get_object_or_404(Jogo, id=id)
     jogo.delete()
