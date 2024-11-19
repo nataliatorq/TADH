@@ -28,6 +28,8 @@ def user_register(request):
             user.set_password(user.password)
             user.save()
             return redirect("login")
+        else:
+            print(form.errors)
 
     return render(request, "pages/cadastro.html", {"form": form})
 
@@ -52,14 +54,25 @@ def user_logout(request):
     return redirect("login")
 
 
+from django.core.paginator import Paginator
+from django.shortcuts import render
+
 @login_required(login_url="login")
 def jogos_list(request):
     recentes = Jogo.objects.filter(categoria="recentes").order_by("-id")[:4]
-    outros = Jogo.objects.filter(categoria="outros").order_by("-id")[:10]
+    
+    outros_list = Jogo.objects.filter(categoria="outros").order_by("-id")
+    paginator = Paginator(outros_list, 10)  # Show 8 items per page
+    
+    page_number = request.GET.get('page', 1)
+    outros = paginator.get_page(page_number)
 
-    context = {"recentes": recentes, "outros": outros}
+    context = {
+        "recentes": recentes, 
+        "outros": outros,
+        "paginator": paginator
+    }
     return render(request, "pages/jogos.html", context)
-
 
 @login_required(login_url="login")
 @has_role_decorator("Admin")
