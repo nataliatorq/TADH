@@ -57,6 +57,7 @@ def user_logout(request):
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
+
 @login_required(login_url="login")
 def jogos_list(request):
     recentes = Jogo.objects.filter(categoria="recentes").order_by("-id")[:4]
@@ -107,3 +108,7 @@ def remover_jogo(request, id):
     jogo = get_object_or_404(Jogo, id=id)
     jogo.delete()
     return redirect("jogos")
+
+
+def sobre(request):
+    return render(request, "pages/sobre.html")
