@@ -1,4 +1,5 @@
 import uuid
+
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
@@ -8,6 +9,7 @@ class BaseUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     birth_date = models.DateField(null=True, blank=True)
+    photo = models.ImageField(upload_to="media/", null=True, blank=True, default=None)
     groups = models.ManyToManyField(
         Group,
         related_name="custom_baseuser_groups",
@@ -45,3 +47,10 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Offensiva(models.Model):
+    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE, related_name="offensiva")
+    streak = models.PositiveIntegerField(default=0)  
+    last_interaction = models.DateField(null=True, blank=True)
+  

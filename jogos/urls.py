@@ -13,4 +13,6 @@ urlpatterns = [
     path("jogos/remover/<int:id>/", views.remover_jogo, name="deletar_jogo"),
     path("sobre/", views.sobre, name="sobre"),
     path("faleconosco/", views.faleconosco, name="faleconosco"),
+    path("perfil/", views.profile, name="profile"),
+    path('perfil/editar/', views.profile_edit, name='profile_edit'),
 ]

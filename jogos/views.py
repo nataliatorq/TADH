@@ -1,5 +1,6 @@
 from datetime import date
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -112,3 +113,30 @@ def sobre(request):
 
 def faleconosco(request):
     return render(request, "pages/faleconosco.html")
+
+@login_required(login_url="login")
+def profile(request):
+    return render(request, "pages/profile.html")
+
+
+@login_required(login_url="login")
+def profile_edit(request):
+    if request.method == "POST":
+        form = UserRegisterForm(request.POST)
+        dia = int(request.POST.get("day"))
+        mes = int(request.POST.get("month"))
+        ano = int(request.POST.get("year"))
+        data_nascimento = date(ano, mes, dia)
+        form.birth_date = data_nascimento
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(user.password)
+            user.save()
+            messages.success(request, "Perfil atualizado com sucesso!")
+            return redirect("login")
+        else:
+            messages.error(request, "Erro ao atualizar o perfil!")
+            return redirect("profile")
+    else:
+        form = UserRegisterForm()
+    return render(request, "pages/profile_edit.html", {"form": form})

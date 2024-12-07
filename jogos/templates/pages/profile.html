@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+    <div class="main-profile">
+        <div class="rectangle">
+        </div>
+        <img class="photo-profile" src="{% static 'img/user 5.svg' %}" alt="User photo" class="author-img">
+        <div class="profile-main-container">
+            <div class="profile-container">
+                <h2 class="user-name">{{ request.user.username }}</h2>
+                <div class="profile-info">
+                <button class="like-btn" id="likeButton" aria-label="Curtir">
+                    <i class="fa-regular fa-heart like-icon"></i>
+                </button>
+                <p>@{{ request.user.username }}</p>
+                </div>
+            </div>
+            <div class="profile-right">
+                <a href="{% url 'profile_edit' %}" class="profile-settings-btn">
+                    Configurações de perfil
+                </a>
+                <div class="login-streak">
+                    <span class="streak-number">{{ request.user.offensiva.streak }}</span>
+                    <span class="streak-text">
+                        Dia{{ request.user.offensiva.streak|pluralize:"s" }} seguido{{ request.user.offensiva.streak|pluralize:"s" }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+         <a href="#" class="start-button">Comece agora</a>
+        <hr class="profile-hr">
+    </div>
+
+   <script>
+    const likeButton = document.getElementById('likeButton');
+
+    likeButton.addEventListener('click', function () {
+      const icon = this.querySelector('i');
+      if (icon.classList.contains('far')) {
+        icon.classList.remove('far'); 
+        icon.classList.add('fas');
+        this.classList.add('liked');
+      } else {
+        icon.classList.remove('fas'); 
+        icon.classList.add('far');
+        this.classList.remove('liked'); 
+      }
+    });
+  </script>
+{% endblock content %}
