@@ -190,3 +190,36 @@ hr {
 hr {
     border: 1px solid white;
 }
+
+.contact-container {
+    margin: 4rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.contact-item {
+    margin: 15px 0;
+}
+
+.main-contact {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    place-items: center;
+}
+
+.contact-title {
+    font-size: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+    margin-left: 0;
+    margin-bottom: 5rem;
+    text-align: center;
+    padding: 1rem 0;
+    color: white;
+    background-color: #0C5893;
+    border-radius: 10px;
+}

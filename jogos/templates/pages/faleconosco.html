@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Fale Conosco{% endblock %}
+
+{% block content %}
+    <h1 class="contact-title">Como você prefere falar conosco?</h1>
+    <div class="main-contact">
+        <div class="contact-container">
+            <div>
+                <img src="{% static 'img/mail 1.svg' %}" alt="email" class="contact-img">
+                <h2>E-mail</h2>
+                <p>Tem alguma dúvida?</p>
+                <p>(email@suport.com)</p>
+            </div>
+            <div class="contact-item">
+                <img src="{% static 'img/phone-call 1.svg' %}" alt="phone" class="contact-img">
+                <h2>Telefone</h2>
+                <p>Você pode ligar a qualquer hora.</p>
+                <p>(+55 11 9988-7766)</p>
+            </div>
+            <div class="contact-item">
+                <img src="{% static 'img/message-circle 1.svg' %}" alt="chat" class="contact-img">
+                <h2>Chat</h2>
+                <p>Precisa de uma ajuda agora?</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock content %}
