@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from rolepermissions.decorators import has_role_decorator
 
-from .forms import JogoForm, UserRegisterForm
+from .forms import JogoForm, UserEditForm, UserRegisterForm
 from .models import Jogo
 
 
@@ -121,13 +121,20 @@ def profile(request):
 
 @login_required(login_url="login")
 def profile_edit(request):
+    user = request.user
     if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        dia = int(request.POST.get("day"))
-        mes = int(request.POST.get("month"))
-        ano = int(request.POST.get("year"))
-        data_nascimento = date(ano, mes, dia)
-        form.birth_date = data_nascimento
+        form = UserEditForm(request.POST, request.FILES, instance=user)
+
+        try:
+            dia = int(request.POST.get("day"))
+            mes = int(request.POST.get("month"))
+            ano = int(request.POST.get("year"))
+            data_nascimento = date(ano, mes, dia)
+            form.birth_date = data_nascimento
+            form.photo = request.POST("photo")
+        except ValueError:
+            form.birth_date = user.birth_date
+            form.photo = user.photo
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(user.password)
@@ -138,5 +145,5 @@ def profile_edit(request):
             messages.error(request, "Erro ao atualizar o perfil!")
             return redirect("profile")
     else:
-        form = UserRegisterForm()
+        form = UserEditForm(instance=user)
     return render(request, "pages/profile_edit.html", {"form": form})

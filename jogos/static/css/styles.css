@@ -401,11 +401,17 @@ hr {
 
 .form-input {
     color: white;
+    font: bold;
     background-color: #121212;
     border: none;
     border-radius: 10px;
     padding: 0.7rem 0.5rem;
     width: 60%;
+}
+
+.form-input:focus {
+    color: white;
+    background-color: #121212;
 }
 
 .date-inputs {
@@ -438,4 +444,25 @@ hr {
     padding: 0.5rem 3rem;
     border-radius: 1rem;
     
+}
+
+.custom-file-input {
+    display: none; 
+}
+.custom-file-label {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #121212;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.custom-file-label:hover {
+    background-color: #3f3e3e;
+}
+.file-name {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333;
 }

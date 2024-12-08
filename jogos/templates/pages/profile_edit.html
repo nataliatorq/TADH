@@ -18,7 +18,9 @@
                 {% else %}
                     <img src="{% static 'img/user 5.svg' %}" alt="User photo" class="img-profile">
                 {% endif %}
-                <input type="file" name="photo" class="form-control" placeholder="Adicionar nova foto" value="{{ form.photo.url }}">
+                <label for="file-upload" class="custom-file-label"><strong>Adicionar nova foto</strong></label>
+                <input id="file-upload" type="file" class="custom-file-input" name="photo">
+                <span class="file-name">Nenhum arquivo selecionado</span>
             </div>
             <div class="right">
                 <div class="form-group">
@@ -40,9 +42,9 @@
                 <div class="form-group date-group">
                     <label class="date-title" for="birth_date">Alterar data de nascimento:</label>
                     <div class="date-inputs">
-                        <input type="text" name="day" placeholder="Dia" class="date-input form-input">
-                        <input type="text" name="month" placeholder="Mês" class="date-input form-input">
-                        <input type="text" name="year" placeholder="Ano" class="date-input form-input">
+                        <input type="text" name="day" placeholder="Dia" class="date-input form-control form-input">
+                        <input type="text" name="month" placeholder="Mês" class="date-input form-control form-input">
+                        <input type="text" name="year" placeholder="Ano" class="date-input form-control form-input">
                     </div>
             </div>
         </div>
@@ -50,4 +52,17 @@
         <button class="start-button save-btn" type="submit">Salvar alterações</button>
         </form>
     </div>
+
+<script>
+    const fileInput = document.getElementById("file-upload");
+    const fileName = document.querySelector(".file-name");
+
+    fileInput.addEventListener("change", (event) => {
+        if (event.target.files.length > 0) {
+            fileName.textContent = event.target.files[0].name;
+        } else {
+            fileName.textContent = "Nenhum arquivo selecionado";
+        }
+    });
+</script>
 {% endblock content %}
