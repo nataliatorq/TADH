@@ -1,10 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 
-from .models import Jogo
-
-User = get_user_model()
+from .models import BaseUser, Jogo
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -13,7 +12,7 @@ class UserRegisterForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User
+        model = BaseUser
         fields = ('username', 'email', 'password', 'password2', 'birth_date', 'photo')
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}),
@@ -25,26 +24,23 @@ class UserRegisterForm(forms.ModelForm):
     
 
 
-class UserEditForm(UserCreationForm):
+class UserEditForm(forms.ModelForm):
 
-    password = forms.CharField(
-        required=False, 
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Nova senha'}
-        ),
+    password1 = forms.CharField(
+        required=False,
+        widget=forms.PasswordInput(attrs={'placeholder': 'Nova senha'}),
         label="Nova senha",
     )
     password2 = forms.CharField(
-        required=False, 
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Nova senha'}
-        ),
+        required=False,
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirme sua senha'}),
         label="Confirmação da nova senha",
     )
 
+
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password', 'password2', 'birth_date', 'photo']
+        model = BaseUser
+        fields = ['username', 'email', 'password1', 'password2', 'birth_date', 'photo']
         widgets = {
             'username': forms.TextInput(
                 attrs={'class': 'form-control form-input', 'placeholder': 'Nome'}
@@ -52,7 +48,7 @@ class UserEditForm(UserCreationForm):
             'email': forms.EmailInput(
                 attrs={'class': 'form-control form-input', 'placeholder': 'Email'}
             ),
-            'password': forms.PasswordInput(
+            'password1': forms.PasswordInput(
                 attrs={'class': 'form-control form-input', 'placeholder': 'Senha'}
             ),
             'password2': forms.PasswordInput(
@@ -78,10 +74,18 @@ class UserEditForm(UserCreationForm):
         password2 = cleaned_data.get("password2")
 
         if password1 or password2:
+            if not password1 or not password2:
+                raise forms.ValidationError("Ambos os campos de senha devem ser preenchidos.")
             if password1 != password2:
                 raise forms.ValidationError("As senhas não coincidem.")
-        
         return cleaned_data
+
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if username and BaseUser.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
+            raise ValidationError("Este nome de usuário já está em uso.")
+        return username
 
     def save(self, commit=True):
         user = super().save(commit=False)

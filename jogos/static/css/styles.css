@@ -505,3 +505,14 @@ hr {
     background: rgba(255, 165, 0, 0.8); 
     border-color: rgba(255, 165, 0, 1);
 }
+
+.errorlist {
+    margin: 0;
+    text-align: center;
+    padding: 0;
+}
+
+.errorlist li {
+    list-style: none;
+    margin: 0;
+}

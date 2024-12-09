@@ -143,7 +143,7 @@ AUTH_USER_MODEL = 'jogos.BaseUser'
 
 
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
+    messages.ERROR: 'error',
     messages.WARNING: 'warning',
     messages.SUCCESS: 'success',
     messages.INFO: 'info',

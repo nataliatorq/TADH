@@ -128,24 +128,27 @@ def profile_edit(request):
         form = UserEditForm(request.POST, request.FILES, instance=user)
 
         try:
-            dia = int(request.POST.get("day"))
-            mes = int(request.POST.get("month"))
-            ano = int(request.POST.get("year"))
+            dia = int(request.POST.get("day", 0))
+            mes = int(request.POST.get("month", 0))
+            ano = int(request.POST.get("year", 0))
             data_nascimento = date(ano, mes, dia)
-            form.birth_date = data_nascimento
-            form.photo = request.POST("photo")
-        except ValueError:
-            form.birth_date = user.birth_date
-            form.photo = user.photo
+            user.birth_date = data_nascimento
+        except (ValueError, TypeError):
+            data_nascimento = user.birth_date
+
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(user.password)
+            user.birth_date = data_nascimento
+            if "photo" in request.FILES:
+                user.photo = request.FILES["photo"]
+            if form.cleaned_data.get("password"):
+                user.set_password(form.cleaned_data["password"])
             user.save()
             messages.success(request, "Perfil atualizado com sucesso!")
-            return redirect("login")
-        else:
-            messages.error(request, "Erro ao atualizar o perfil!")
             return redirect("profile")
+        else:
+            messages.error(request, "Erro ao atualizar o perfil")
     else:
         form = UserEditForm(instance=user)
+
     return render(request, "pages/profile_edit.html", {"form": form})

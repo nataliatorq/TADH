@@ -5,11 +5,19 @@
 {% block title %}Editar Perfil{% endblock %}
 
 {% block content %}
+
     <div class="main-container-profile">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
         <div class="profile-settings">
         <h1 class="title-settings">Editar perfil</h1>
+
+        {% if form.errors %}
+            <div class="message message-error">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
         <div class="main-settings">
             <div class="left">
                 <h2>{{ request.user.username }}</h2>
@@ -26,18 +34,28 @@
                 <div class="form-group">
                     <label for="username">Nome</label>
                     {{ form.username }}
+
+                    {{ form.username.errors }}
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     {{ form.email }}
+
+                    {{ form.email.errors }}
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
-                    {{ form.password }}
+                    {{ form.password1 }}
+                    
+                    {{ form.password1.errors }}
+
                 </div>
                 <div class="form-group">
                     <label for="confirmar-senha">Confirmar senha</label>
                     {{ form.password2 }}
+                   
+                    {{ form.password2.errors }}
+
                 </div>
                 <div class="form-group date-group">
                     <label class="date-title" for="birth_date">Alterar data de nascimento:</label>
