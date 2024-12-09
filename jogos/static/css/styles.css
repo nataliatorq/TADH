@@ -516,3 +516,13 @@ hr {
     list-style: none;
     margin: 0;
 }
+
+.btn-search {
+    width: 60%;
+    margin-left: 5rem;
+}
+
+.search-form {
+    width: 100%;
+    max-width: 1200px;
+}

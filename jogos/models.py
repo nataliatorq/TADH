@@ -1,6 +1,6 @@
 import uuid
 
-from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -30,14 +30,14 @@ class Jogo(models.Model):
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE)
+    user = models.OneToOneField("jogos.BaseUser", on_delete=models.SET_NULL, related_name="customer", null=True)
 
     def __str__(self):
         return self.user.username
 
 
 class Offensiva(models.Model):
-    user = models.OneToOneField(BaseUser, on_delete=models.CASCADE, related_name="offensiva")
+    user = models.OneToOneField("jogos.BaseUser", on_delete=models.SET_NULL, related_name="offensiva", null=True)
     streak = models.PositiveIntegerField(default=0)  
     last_interaction = models.DateField(null=True, blank=True)
   
