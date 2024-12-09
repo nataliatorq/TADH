@@ -44,8 +44,10 @@ def user_login(request):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
+            messages.success(request, "Login efetuado com sucesso!")
             return redirect("jogos")
         else:
+            messages.error(request, "Usuário ou senha inválidos!")
             return redirect("login")
     return render(request, "pages/login.html")
 

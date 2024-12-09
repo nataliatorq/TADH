@@ -9,21 +9,8 @@ class BaseUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     birth_date = models.DateField(null=True, blank=True)
-    photo = models.ImageField(upload_to="media/", null=True, blank=True, default=None)
-    groups = models.ManyToManyField(
-        Group,
-        related_name="custom_baseuser_groups",
-        related_query_name="custom_baseuser_group",
-        blank=True,
-        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="custom_baseuser_permissions",
-        related_query_name="custom_baseuser_permission",
-        blank=True,
-        help_text="Specific permissions for this user.",
-    )
+    photo = models.ImageField(upload_to="users/images/%Y/%m/%d/", blank=True, default="")
+
     USERNAME_FIELD = "username"
 
 

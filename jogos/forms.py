@@ -9,17 +9,17 @@ User = get_user_model()
 
 class UserRegisterForm(forms.ModelForm):
     password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control form-input', 'placeholder': 'Confirme sua senha'})
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirme sua senha'})
     )
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password', 'password2', 'birth_date', 'photo')
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control form-input', 'placeholder': 'Nome'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control form-input', 'placeholder': 'Email'}),
-            'password': forms.PasswordInput(attrs={'class': 'form-control form-input', 'placeholder': 'Crie uma senha'}),
-            'birth_date': forms.DateInput(attrs={'class': 'form-control    form-input'}),
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Crie uma senha'}),
+            'birth_date': forms.DateInput(attrs={'class': 'form-control'}),
             'photo': forms.FileInput(attrs={'placeholder': 'Adicionar nova foto form-input'}),
         }
     
