@@ -8,12 +8,7 @@
     <div class="main-profile">
         <div class="rectangle">
         </div>
-        
-        {% if request.user.photo.url != '' %}
-            <img class="photo-profile" src="{{ request.user.photo.url }}" alt="User photo" class="author-img">
-        {% else %}
-            <img class="photo-profile" src="{% static 'img/user 5.svg' %}" alt="User photo" class="author-img">
-        {% endif %}
+        <img class="photo-profile" src="{% static 'img/user 5.svg' %}" alt="User photo" class="author-img">
         <div class="profile-main-container">
             <div class="profile-container">
                 <h2 class="user-name">{{ request.user.username }}</h2>
