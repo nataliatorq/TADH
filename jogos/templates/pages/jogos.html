@@ -25,7 +25,8 @@
                     {% if user|has_role:'Admin' %}
                     <div class="d-flex justify-content-center 
                     gap-2 mt-4">
-              
+
+                        {% if user|has_role:'Admin' %}
                         <a href="{% url 'editar_jogo' jogo.id %}" class="btn btn-warning">
                           <i class="fas fa-edit"></i>
                         </a>
@@ -34,6 +35,7 @@
                             <i class="fas fa-trash"></i>
                         </button>
                       </div>
+                      {% endif %}
                       {% endif %}
                 </div>
             </div>
@@ -73,7 +75,8 @@
                 <div class="card-body bg-dark text-center">
                     <h5 class="card-title text-light mb-4">{{ jogo.titulo }}</h5>
                     <a href="{% url 'acessar_jogo' id=jogo.id %}" class="btn btn-primary w-100">Iniciar Sessão</a>
-                        
+                    
+                    {% if user|has_role:'Admin' %}
                     <div class="d-flex justify-content-center gap-2 mt-4">
                         <a href="{% url 'editar_jogo' jogo.id %}" class="btn btn-warning">
                           <i class="fas fa-edit"></i>
@@ -83,6 +86,7 @@
                         </button>
                         
                       </div>
+                      {% endif %}
                 </div>
             </div>
             <div class="modal fade" id="confirmDeleteModal-{{ jogo.id }}" tabindex="-1" aria-labelledby="confirmDeleteLabel-{{ jogo.id }}" aria-hidden="true">
