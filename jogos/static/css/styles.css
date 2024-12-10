@@ -271,6 +271,18 @@ hr {
     transform: translate(-100%, -50%);
 }
 
+.photo-profile-edit {
+    border: 2px solid white;
+    padding: 1rem;
+    border-radius: 100%;
+    background: rgb(31, 30, 30);
+}
+
+.photo-user {
+    transform: translate(-75%, -50%);
+    width: 250px;
+}
+
 .img-profile {
     border: 2px solid white;
     padding: 1rem;
@@ -525,4 +537,12 @@ hr {
 .search-form {
     width: 100%;
     max-width: 1200px;
+}
+
+.link-delete-photo {
+    background-color: white;
+    border-radius: 100%;
+    padding: 5px;
+    position: absolute;
+    transform: translate(350%, 350%);
 }

@@ -21,10 +21,11 @@
         <div class="main-settings">
             <div class="left">
                 <h2>{{ request.user.username }}</h2>
-                {% if form.user.photo.url %}
-                    <img src="{{ request.user.photo.url }}" alt="User photo" class="img-profile">
+                {% if request.user.photo %}
+                    <a class="link-delete-photo" href="{% url 'deletar_photo' %}"><img src="{% static 'img/trash.svg' %}" alt="User photo" class="trash-photo"></a>
+                    <img class="" src="{{ request.user.photo.url }}" alt="User photo" class="author-img">
                 {% else %}
-                    <img src="{% static 'img/user 5.svg' %}" alt="User photo" class="img-profile">
+                    <img class="photo-profile-edit" src="{% static 'img/user 5.svg' %}" alt="User photo" class="author-img">
                 {% endif %}
                 <label for="file-upload" class="custom-file-label"><strong>Adicionar nova foto</strong></label>
                 <input id="file-upload" type="file" class="custom-file-input" name="photo">

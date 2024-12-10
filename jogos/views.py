@@ -163,3 +163,10 @@ def profile_edit(request):
         form = UserEditForm(instance=user)
 
     return render(request, "pages/profile_edit.html", {"form": form})
+
+
+def deletar_photo(request):
+    user = request.user
+    user.photo.delete()
+    messages.success(request, "Foto removida!")
+    return redirect("profile_edit")

@@ -9,9 +9,12 @@ class BaseUser(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     birth_date = models.DateField(null=True, blank=True)
-    photo = models.ImageField(upload_to="users/images/%Y/%m/%d/", blank=True, default="")
+    photo = models.ImageField(upload_to="users/images/%Y/%m/%d/", blank=True, null=True)
 
     USERNAME_FIELD = "username"
+
+    def __str__(self):
+        return self.username
 
 
 class Jogo(models.Model):
