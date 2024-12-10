@@ -30,8 +30,10 @@ def user_register(request):
             user = form.save(commit=False)
             user.set_password(user.password)
             user.save()
+            messages.success(request, "Usuário criado com sucesso!")
             return redirect("login")
         else:
+            messages.error(request, "Erro ao criar usuário")
             print(form.errors)
 
     return render(request, "pages/cadastro.html", {"form": form})
@@ -55,6 +57,7 @@ def user_login(request):
 
 @login_required(login_url="login")
 def user_logout(request):
+    messages.success(request, "Você deslogou do sistema")
     logout(request)
     return redirect("login")
 
@@ -93,7 +96,10 @@ def criar_jogo(request):
         form = JogoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Jogo criado com sucesso!")
             return redirect("jogos")
+        else:
+            messages.error(request, "Erro ao criar jogo")
     else:
         form = JogoForm()
     return render(request, "pages/jogo-form.html", {"form": form})
@@ -107,7 +113,10 @@ def editar_jogo(request, id):
         form = JogoForm(request.POST, request.FILES, instance=jogo)
         if form.is_valid():
             form.save()
+            messages.success(request, "Jogo editado com sucesso!")
             return redirect("jogos")
+        else:
+            messages.error(request, "Erro ao editar jogo")
     else:
         form = JogoForm(instance=jogo)
     return render(request, "pages/jogo-form.html", {"form": form, "jogo": jogo})
@@ -118,6 +127,7 @@ def editar_jogo(request, id):
 def remover_jogo(request, id):
     jogo = get_object_or_404(Jogo, id=id)
     jogo.delete()
+    messages.success(request, "Jogo removido com sucesso!")
     return redirect("jogos")
 
 
