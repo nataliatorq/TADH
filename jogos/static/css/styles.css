@@ -546,3 +546,7 @@ hr {
     position: absolute;
     transform: translate(350%, 350%);
 }
+
+.card-jogo {
+    max-width: 300px;
+}

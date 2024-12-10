@@ -64,7 +64,7 @@ def user_logout(request):
 
 @login_required(login_url="login")
 def jogos_list(request):
-    recentes = Jogo.objects.filter(categoria="outros").order_by("-id")[:4]
+    recentes = Jogo.objects.filter(categoria="recentes").order_by("-id")[:4]
     
     outros_list = Jogo.objects.filter(categoria="outros").order_by("-id")
 
@@ -180,3 +180,15 @@ def deletar_photo(request):
     user.photo.delete()
     messages.success(request, "Foto removida!")
     return redirect("profile_edit")
+
+
+def acessar_jogo(request, id):
+    jogo = get_object_or_404(Jogo, id=id)
+
+    print(jogo)
+
+    if jogo.categoria == "outros":
+        jogo.categoria = "recentes"
+        jogo.save()
+    
+    return redirect(jogo.url_jogo)

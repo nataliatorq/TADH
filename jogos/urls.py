@@ -16,4 +16,5 @@ urlpatterns = [
     path("perfil/", views.profile, name="profile"),
     path('perfil/editar/', views.profile_edit, name='profile_edit'),
     path("usuarios/photo/deletar/", views.deletar_photo, name="deletar_photo"),
+    path("jogo/<int:id>/", views.acessar_jogo, name="acessar_jogo"),
 ]
