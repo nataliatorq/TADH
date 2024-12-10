@@ -9,18 +9,26 @@
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título</label>
                     {{ form.titulo }}
+
+                    {{ form.titulo.errors }}
                 </div>
                 <div class="mb-3">
                     <label for="descricao" class="form-label">Descrição</label>
                     {{ form.descricao }}
+
+                    {{ form.descricao.errors }}
                 </div>
                 <div class="mb-3">
                     <label for="imagem" class="form-label">Imagem</label>
                     {{ form.imagem }}
+
+                    {{ form.imagem.errors }}
                 </div>
                 <div class="mb-3">
                     <label for="ur_jogo" class="form-label">Url do Jogo</label>
                     {{ form.url_jogo }}
+
+                    {{ form.url_jogo.errors }}
                 </div>
                 <div class="d-grid mb-3">
                     <button type="submit" class="btn btn-primary">Salvar</button>

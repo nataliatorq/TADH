@@ -9,15 +9,23 @@
         {% csrf_token %}
             <div class="mb-3">
                 {{ form.username }}
+
+                {{ form.username.errors }}
             </div>
             <div class="mb-3">
                 {{ form.email }}
+
+                {{ form.email.errors }}
             </div>
             <div class="mb-3">
                 {{ form.password }}
+
+                {{ form.password.errors }}
             </div>
             <div class="mb-3">
                 {{ form.password2 }}
+
+                {{ form.password2.errors }}
             </div>
             <div class="mb-3">
                 <label class="form-label">Insira uma data de nascimento:</label>
